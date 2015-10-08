@@ -2,6 +2,7 @@
 
 function GameBoyCore(canvas, ROMImage) {
 	//Params, etc...
+	console.log(canvas)
 	this.canvas = canvas;						//Canvas DOM object for drawing out the graphics to.
 	this.drawContext = null;					// LCD Context
 	this.ROMImage = ROMImage;					//The game's ROM.
