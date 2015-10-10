@@ -44,7 +44,6 @@ function fileLoadShimCode(files, ROMHandler, isBIOS) {
                     })
 
                 }else{
-                    console.log(files[files.length - 1])
                     downloadFile("1986 - Pokemon - Emerald Version (UE).gba", function(){
                         ROMHandler(this.response)
                     })
@@ -70,10 +69,9 @@ function fileLoadShimCode(files, ROMHandler, isBIOS) {
 function fileLoadBIOS() {
     fileLoadShimCode("BIOS", attachBIOS, true);
 }
-fileLoadROM();
+setTimeout(function(){fileLoadROM();fileLoadBIOS();}, 1000);
 function fileLoadROM() {
     fileLoadShimCode("asdsad", attachROM, false);
-    fileLoadBIOS()
 }
 function downloadFile(fileName, registrationHandler) {
     var ajax = new XMLHttpRequest();

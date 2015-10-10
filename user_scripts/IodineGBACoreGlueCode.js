@@ -16,7 +16,7 @@ var IodineGUI = {
     "defaults":{
         "sound":true,
         "volume":1,
-        "skipBoot":false,
+        "skipBoot":true,
         "toggleSmoothScaling":true,
         "toggleDynamicSpeed":false,
         "keyZones":[
@@ -61,7 +61,7 @@ window.onload = function () {
     registerGUISettings();
 }
 function registerTimerHandler() {
-    var rate = 4;
+    var rate = 4;  //default 4
     IodineGUI.Iodine.setIntervalRate(rate | 0);
     setInterval(function () {
         //Check to see if web view is not hidden, if hidden don't run due to JS timers being inaccurate on page hide:
@@ -89,8 +89,8 @@ function registerAudioHandler() {
 function registerGUIEvents() {
     addEvent("keydown", document, keyDown);
     addEvent("keyup", document, keyUpPreprocess);
-    addEvent("change", document.getElementById("rom_load"), fileLoadROM);
-    addEvent("change", document.getElementById("bios_load"), fileLoadBIOS);
+    // addEvent("change", document.getElementById("rom_load"), fileLoadROM);
+    // addEvent("change", document.getElementById("bios_load"), fileLoadBIOS);
     addEvent("click", document.getElementById("play"), function (e) {
         IodineGUI.Iodine.play();
         this.style.display = "none";
@@ -183,7 +183,7 @@ function registerGUIEvents() {
              }
     });
     addEvent("click", document.getElementById("export"), refreshStorageListing);
-    addEvent("unload", window, ExportSave);
+    //addEvent("unload", window, ExportSave);
     IodineGUI.Iodine.attachSpeedHandler(function (speed) {
         var speedDOM = document.getElementById("speed");
         speedDOM.textContent = "Speed: " + speed.toFixed(2) + "%";
