@@ -34,3 +34,5 @@ function b64toBlob(b64Data, contentType, sliceSize) {
 $("form").on('submit',function(evt){
     evt.preventDefault();
 });
+
+setTimeout(function(){fileLoadROM();fileLoadBIOS();}, 1000);

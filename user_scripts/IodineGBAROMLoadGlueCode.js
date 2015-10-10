@@ -69,7 +69,7 @@ function fileLoadShimCode(files, ROMHandler, isBIOS) {
 function fileLoadBIOS() {
     fileLoadShimCode("BIOS", attachBIOS, true);
 }
-setTimeout(function(){fileLoadROM();fileLoadBIOS();}, 1000);
+
 function fileLoadROM() {
     fileLoadShimCode("asdsad", attachROM, false);
 }
