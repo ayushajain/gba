@@ -15,6 +15,7 @@ var IodineGUI = {
     "mixerInput":null,
     "defaults":{
         "sound":true,
+        "emulatorSpeed": 10,
         "volume":1,
         "skipBoot":true,
         "toggleSmoothScaling":true,
@@ -136,6 +137,7 @@ function registerGUIEvents() {
              if (typeof this.files != "undefined") {
                 try {
                     if (this.files.length >= 1) {
+                        console.log(this.files)
                         writeRedTemporaryText("Reading the local file \"" + this.files[0].name + "\" for importing.");
                         try {
                             //Gecko 1.9.2+ (Standard Method)

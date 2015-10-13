@@ -1,11 +1,11 @@
 "use strict";
 /*
  Copyright (C) 2012-2015 Grant Galitz
- 
+
  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
- 
+
  The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
- 
+
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 function GameBoyAdvanceSaves(IOCore) {
@@ -41,6 +41,8 @@ GameBoyAdvanceSaves.prototype.referenceSave = function (saveType) {
     this.saveType = saveType | 0;
 }
 GameBoyAdvanceSaves.prototype.importSave = function (saves, saveType) {
+    console.log("imported saves")
+
     this.UNDETERMINED.load(saves);
     this.SRAMChip.load(saves);
     this.FLASHChip.load(saves);
@@ -48,8 +50,14 @@ GameBoyAdvanceSaves.prototype.importSave = function (saves, saveType) {
     this.referenceSave(saveType | 0);
 }
 GameBoyAdvanceSaves.prototype.exportSave = function () {
+    if(this.currentChip.saves != null){
+        ref.set(this.currentChip.saves.toString())
+    }
+
     return this.currentChip.saves;
 }
+
+
 GameBoyAdvanceSaves.prototype.exportSaveType = function () {
     return this.saveType | 0;
 }

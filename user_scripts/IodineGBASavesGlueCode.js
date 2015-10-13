@@ -13,7 +13,7 @@ function ImportSaveCallback(name) {
         var save = findValue("SAVE_" + name);
         if (save != null) {
             writeRedTemporaryText("Loaded save.");
-            return base64ToArray(save);
+            return base64ToArray(save);    //convert this to array
         }
     }
     catch (error) {
@@ -111,6 +111,7 @@ function generateMultiBlob(blobPairs) {
     return saveString;
 }
 function decodeBlob(blobData) {
+    console.log(blobData)
     /*Format is as follows:
      - 13 byte string "EMULATOR_DATA"
      - 4 byte total size (including these 4 bytes).
@@ -170,8 +171,6 @@ function decodeBlob(blobData) {
     return blobProperties;
 }
 function refreshStorageListing() {
-
-
     ExportSave();
     var keys = getLocalStorageKeys();
     var blobPairs = [];
@@ -179,10 +178,11 @@ function refreshStorageListing() {
         blobPairs[index] = [keys[index], JSON.stringify(findValue(keys[index]))];
     }
 
-//"data:application/octet-stream;base64," +
     var file =  base64(generateMultiBlob(blobPairs));
     ref.set(file)
     console.log("exported")
+
+    //"data:application/octet-stream;base64," +
     //push save data to aws //////////////////////////////////////////////////////////////////////////////////////////////////
     //this.download = "gameboy_advance_saves_" + ((new Date()).getTime()) + ".export";
 
@@ -216,11 +216,11 @@ function getLocalStorageKeys() {
 }
 function findKey(keyNum) {
     try {
-        return window.localStorage.key(keyNum);
+        //return window.localStorage.key(keyNum);
     }
     catch (error) {
         //An older Gecko 1.8.1/1.9.0 method of storage (Deprecated due to the obvious security hole):
-        return window.globalStorage[location.hostname].key(keyNum);
+        //return window.globalStorage[location.hostname].key(keyNum);
     }
     return null;
 }

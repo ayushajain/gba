@@ -1,9 +1,29 @@
 var ref = new Firebase("https://gba.firebaseio.com/");
 
 ref.once("value", function(snapshot){
-    console.log(b64toBlob(snapshot.val()))
-})
-//
+    //console.log(atob(snapshot.val()))
+});
+
+$("form").on('submit',function(evt){
+    evt.preventDefault();
+});
+
+//update firebase on close
+window.onbeforeunload = function(){
+    console.log("wait")
+    setTimeout(function(){
+        console.log(12332)
+    }, 5000)
+    refreshStorageListing();
+}
+
+setTimeout(function(){
+    fileLoadROM();
+    fileLoadBIOS();
+    IodineGUI.Iodine.setSpeed(1.2)
+    console.log(IodineGUI.Iodine);
+
+}, 1000);
 
 
 function b64toBlob(b64Data, contentType, sliceSize) {
@@ -29,10 +49,3 @@ function b64toBlob(b64Data, contentType, sliceSize) {
     var blob = new Blob(byteArrays, {type: contentType});
     return blob;
 }
-
-
-$("form").on('submit',function(evt){
-    evt.preventDefault();
-});
-
-setTimeout(function(){fileLoadROM();fileLoadBIOS();}, 1000);
