@@ -20,8 +20,8 @@ window.onbeforeunload = function(){
 setTimeout(function(){
     fileLoadROM();
     fileLoadBIOS();
-    IodineGUI.Iodine.setSpeed(1.2)
-    console.log(IodineGUI.Iodine);
+    Gameboy.Core.setSpeed(1.2)
+    console.log(Gameboy.Core);
 
 }, 1000);
 

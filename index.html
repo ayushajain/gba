@@ -1,70 +1,67 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>IodineGBA</title>
+        <title>myGBA Emulator</title>
         <meta charset="UTF-8">
 
         <script src="https://cdn.firebase.com/js/client/2.3.1/firebase.js"></script>
 
         <!--Required Scripts-->
-        <script src="IodineGBA/includes/TypedArrayShim.js"></script>
-        <script src="IodineGBA/core/Cartridge.js"></script>
-        <script src="IodineGBA/core/DMA.js"></script>
-        <script src="IodineGBA/core/Emulator.js"></script>
-        <script src="IodineGBA/core/Graphics.js"></script>
-        <script src="IodineGBA/core/RunLoop.js"></script>
-        <script src="IodineGBA/core/Memory.js"></script>
-        <script src="IodineGBA/core/IRQ.js"></script>
-        <script src="IodineGBA/core/JoyPad.js"></script>
-        <script src="IodineGBA/core/Serial.js"></script>
-        <script src="IodineGBA/core/Sound.js"></script>
-        <script src="IodineGBA/core/Timer.js"></script>
-        <script src="IodineGBA/core/Wait.js"></script>
-        <script src="IodineGBA/core/CPU.js"></script>
-        <script src="IodineGBA/core/Saves.js"></script>
-        <script src="IodineGBA/core/sound/FIFO.js"></script>
-        <script src="IodineGBA/core/sound/Channel1.js"></script>
-        <script src="IodineGBA/core/sound/Channel2.js"></script>
-        <script src="IodineGBA/core/sound/Channel3.js"></script>
-        <script src="IodineGBA/core/sound/Channel4.js"></script>
-        <script src="IodineGBA/core/CPU/ARM.js"></script>
-        <script src="IodineGBA/core/CPU/THUMB.js"></script>
-        <script src="IodineGBA/core/CPU/CPSR.js"></script>
-        <script src="IodineGBA/core/graphics/Renderer.js"></script>
-        <script src="IodineGBA/core/graphics/RendererProxy.js"></script>
-        <script src="IodineGBA/core/graphics/BGTEXT.js"></script>
-        <script src="IodineGBA/core/graphics/BG2FrameBuffer.js"></script>
-        <script src="IodineGBA/core/graphics/BGMatrix.js"></script>
-        <script src="IodineGBA/core/graphics/AffineBG.js"></script>
-        <script src="IodineGBA/core/graphics/ColorEffects.js"></script>
-        <script src="IodineGBA/core/graphics/Mosaic.js"></script>
-        <script src="IodineGBA/core/graphics/OBJ.js"></script>
-        <script src="IodineGBA/core/graphics/OBJWindow.js"></script>
-        <script src="IodineGBA/core/graphics/Window.js"></script>
-        <script src="IodineGBA/core/graphics/Compositor.js"></script>
-        <script src="IodineGBA/core/memory/DMA0.js"></script>
-        <script src="IodineGBA/core/memory/DMA1.js"></script>
-        <script src="IodineGBA/core/memory/DMA2.js"></script>
-        <script src="IodineGBA/core/memory/DMA3.js"></script>
-        <script src="IodineGBA/core/cartridge/SaveDeterminer.js"></script>
-        <script src="IodineGBA/core/cartridge/SRAM.js"></script>
-        <script src="IodineGBA/core/cartridge/FLASH.js"></script>
-        <script src="IodineGBA/core/cartridge/EEPROM.js"></script>
-        <!--Add your webpage scripts below-->
-        <script src="user_scripts/XAudioJS/swfobject.js"></script>
-        <script src="user_scripts/XAudioJS/resampler.js"></script>
-        <script src="user_scripts/XAudioJS/XAudioServer.js"></script>
-        <script src="user_scripts/IodineGBAROMLoadGlueCode.js"></script>
-        <script src="user_scripts/IodineGBAJoyPadGlueCode.js"></script>
-        <script src="user_scripts/IodineGBASavesGlueCode.js"></script>
-        <script src="user_scripts/IodineGBAGraphicsGlueCode.js"></script>
-        <script src="user_scripts/IodineGBAAudioGlueCode.js"></script>
-        <script src="user_scripts/IodineGBACoreGlueCode.js"></script>
-        <script src="user_scripts/base64.js"></script>
-        <link rel="stylesheet" href="user_css/main.css">
+        <script src="EmulatorGBA/includes/TypedArrayShim.js"></script>
+        <script src="EmulatorGBA/core/Cartridge.js"></script>
+        <script src="EmulatorGBA/core/DMA.js"></script>
+        <script src="EmulatorGBA/core/Emulator.js"></script>
+        <script src="EmulatorGBA/core/Graphics.js"></script>
+        <script src="EmulatorGBA/core/RunLoop.js"></script>
+        <script src="EmulatorGBA/core/Memory.js"></script>
+        <script src="EmulatorGBA/core/IRQ.js"></script>
+        <script src="EmulatorGBA/core/JoyPad.js"></script>
+        <script src="EmulatorGBA/core/Serial.js"></script>
+        <script src="EmulatorGBA/core/Sound.js"></script>
+        <script src="EmulatorGBA/core/Timer.js"></script>
+        <script src="EmulatorGBA/core/Wait.js"></script>
+        <script src="EmulatorGBA/core/CPU.js"></script>
+        <script src="EmulatorGBA/core/Saves.js"></script>
+        <script src="EmulatorGBA/core/sound/FIFO.js"></script>
+        <script src="EmulatorGBA/core/sound/Channel1.js"></script>
+        <script src="EmulatorGBA/core/sound/Channel2.js"></script>
+        <script src="EmulatorGBA/core/sound/Channel3.js"></script>
+        <script src="EmulatorGBA/core/sound/Channel4.js"></script>
+        <script src="EmulatorGBA/core/CPU/ARM.js"></script>
+        <script src="EmulatorGBA/core/CPU/THUMB.js"></script>
+        <script src="EmulatorGBA/core/CPU/CPSR.js"></script>
+        <script src="EmulatorGBA/core/graphics/Renderer.js"></script>
+        <script src="EmulatorGBA/core/graphics/RendererProxy.js"></script>
+        <script src="EmulatorGBA/core/graphics/BGTEXT.js"></script>
+        <script src="EmulatorGBA/core/graphics/BG2FrameBuffer.js"></script>
+        <script src="EmulatorGBA/core/graphics/BGMatrix.js"></script>
+        <script src="EmulatorGBA/core/graphics/AffineBG.js"></script>
+        <script src="EmulatorGBA/core/graphics/ColorEffects.js"></script>
+        <script src="EmulatorGBA/core/graphics/Mosaic.js"></script>
+        <script src="EmulatorGBA/core/graphics/OBJ.js"></script>
+        <script src="EmulatorGBA/core/graphics/OBJWindow.js"></script>
+        <script src="EmulatorGBA/core/graphics/Window.js"></script>
+        <script src="EmulatorGBA/core/graphics/Compositor.js"></script>
+        <script src="EmulatorGBA/core/memory/DMA0.js"></script>
+        <script src="EmulatorGBA/core/memory/DMA1.js"></script>
+        <script src="EmulatorGBA/core/memory/DMA2.js"></script>
+        <script src="EmulatorGBA/core/memory/DMA3.js"></script>
+        <script src="EmulatorGBA/core/cartridge/SaveDeterminer.js"></script>
+        <script src="EmulatorGBA/core/cartridge/SRAM.js"></script>
+        <script src="EmulatorGBA/core/cartridge/FLASH.js"></script>
+        <script src="EmulatorGBA/core/cartridge/EEPROM.js"></script>
+
+        <!-- scripts -->
+        <script src="scripts/XAudioJS/swfobject.js"></script>
+        <script src="scripts/XAudioJS/resampler.js"></script>
+        <script src="scripts/XAudioJS/XAudioServer.js"></script>
+        <script src="scripts/GBACore.js"></script>
+        <script src="scripts/base64.js"></script>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-        <script src="main.js"></script>
+        <script src="scripts/main.js"></script>
+
+        <link rel="stylesheet" href="styles/main.css">
 
 
     </head>
