@@ -1,4 +1,4 @@
-"use strict";
+"use strict"
 /*
  Copyright (C) 2012-2015 Grant Galitz
 
@@ -40,15 +40,18 @@ GameBoyAdvanceSaves.prototype.referenceSave = function (saveType) {
     this.currentChip.initialize();
     this.saveType = saveType | 0;
 }
+
+//TODO: restructure save handler to input binary data from firebase
 GameBoyAdvanceSaves.prototype.importSave = function (saves, saveType) {
     console.log("imported saves")
-
     this.UNDETERMINED.load(saves);
     this.SRAMChip.load(saves);
     this.FLASHChip.load(saves);
     this.EEPROMChip.load(saves);
     this.referenceSave(saveType | 0);
 }
+
+//TODO: make backend export outside of emulator processing files (move to the export handles) 
 GameBoyAdvanceSaves.prototype.exportSave = function () {
     if(this.currentChip.saves != null){
         ref.set(this.currentChip.saves.toString())
