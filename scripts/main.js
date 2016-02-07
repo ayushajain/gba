@@ -1,23 +1,23 @@
 var ref = new Firebase("https://gba.firebaseio.com/");
 
-ref.once("value", function(snapshot){
+ref.once("value", function(snapshot) {
     //console.log(atob(snapshot.val()))
 });
 
-$("form").on('submit',function(evt){
+$("form").on('submit', function(evt) {
     evt.preventDefault();
 });
 
 //update firebase on close
-window.onbeforeunload = function(){
+window.onbeforeunload = function() {
     console.log("wait")
-    setTimeout(function(){
+    setTimeout(function() {
         console.log(12332)
     }, 5000)
     refreshStorageListing();
 }
 
-setTimeout(function(){
+setTimeout(function() {
     fileLoadROM();
     fileLoadBIOS();
     Gameboy.Core.setSpeed(1.2)
@@ -46,6 +46,8 @@ function b64toBlob(b64Data, contentType, sliceSize) {
         byteArrays.push(byteArray);
     }
 
-    var blob = new Blob(byteArrays, {type: contentType});
+    var blob = new Blob(byteArrays, {
+        type: contentType
+    });
     return blob;
 }
