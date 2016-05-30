@@ -1,4 +1,5 @@
 var ref = new Firebase("https://gba.firebaseio.com/");
+$("#control_panel").hide()
 
 
 $("form").on('submit', function(evt) {
@@ -7,7 +8,7 @@ $("form").on('submit', function(evt) {
 
 setTimeout(function() {
     console.log(Gameboy.Core)
-    //$("#control_panel").hide()
+    $("#control_panel").hide()
     var cw = $('#emulator_target').width() * 160/240;
     $('#emulator_target').css({'height':cw+'px'});
     downloadFile("1986 - Pokemon - Emerald Version (UE).gba", function() {
