@@ -1,29 +1,58 @@
 var ref = new Firebase("https://gba.firebaseio.com/");
 
-ref.once("value", function(snapshot) {
-    //console.log(atob(snapshot.val()))
-});
 
 $("form").on('submit', function(evt) {
     evt.preventDefault();
 });
 
-//update firebase on close
-window.onbeforeunload = function() {
-    console.log("wait")
+setTimeout(function() {
+    console.log(Gameboy.Core)
+    //$("#control_panel").hide()
+    var cw = $('#emulator_target').width() * 160/240;
+    $('#emulator_target').css({'height':cw+'px'});
+    downloadFile("1986 - Pokemon - Emerald Version (UE).gba", function() {
+        console.log(this.response)
+        fileLoadROM(this.response);
+    });
+    fileLoadBIOS();
+    Gameboy.Core.setSpeed(1);
     setTimeout(function() {
-        console.log(12332)
-    }, 5000)
-    refreshStorageListing();
+        $("#play").trigger("click");
+        var cw = $('#emulator_target').width() * 160/240;
+        $('#emulator_target').css({'height':cw+'px'});
+
+    }, 1000);
+}, 1000);
+
+
+function togglleRomSelector(){
+    $('#rominput').click();
 }
 
-setTimeout(function() {
-    fileLoadROM();
-    fileLoadBIOS();
-    Gameboy.Core.setSpeed(1.2)
-    console.log(Gameboy.Core);
+$(document).on('change','#rominput',function(){
+    var input = document.getElementById('rominput');
+    console.log("breh")
+    if(input.files[0]){
+        var fileReader = new FileReader();
+        fileReader.onload = function() {
+            fileLoadROM(this.result);
+            Gameboy.Core.restart();
+            setTimeout(function() {
+                $("#play").trigger("click");
+                var cw = $('#emulator_target').width() * 160/240;
+                $('#emulator_target').css({'height':cw+'px'});
 
-}, 1000);
+            }, 1000);
+        };
+        fileReader.readAsArrayBuffer(input.files[0]);
+    }
+
+});
+
+$(window).resize(function(){
+    var cw = $('#emulator_target').width() * 160/240;
+    $('#emulator_target').css({'height':cw+'px'});
+})
 
 
 function b64toBlob(b64Data, contentType, sliceSize) {

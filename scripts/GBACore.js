@@ -14,7 +14,7 @@ var Gameboy = {
     "defaults": {
         "sound": true,
         "emulatorSpeed": 10,
-        "volume": 1,
+        "volume": 0.3,
         "skipBoot": true,
         "toggleSmoothScaling": true,
         "toggleDynamicSpeed": false,
@@ -182,10 +182,6 @@ function registerGUIEvents() {
     });
     addEvent("click", document.getElementById("export"), refreshStorageListing);
     //addEvent("unload", window, ExportSave);
-    Gameboy.Core.attachSpeedHandler(function(speed) {
-        var speedDOM = document.getElementById("speed");
-        speedDOM.textContent = "Speed: " + speed.toFixed(2) + "%";
-    });
     addEvent("change", document.getElementById("volume"), volChangeFunc);
     addEvent("input", document.getElementById("volume"), volChangeFunc);
 }
@@ -203,11 +199,8 @@ function registerGUISettings() {
         volControl.value = Gameboy.defaults.volume * 100;
     } catch (e) {}
     Gameboy.mixerInput.setVolume(Gameboy.defaults.volume);
-    document.getElementById("skip_boot").checked = Gameboy.defaults.skipBoot;
     Gameboy.Core.toggleSkipBootROM(Gameboy.defaults.skipBoot);
-    document.getElementById("toggleSmoothScaling").checked = Gameboy.defaults.toggleSmoothScaling;
     Gameboy.Blitter.setSmoothScaling(Gameboy.defaults.toggleSmoothScaling);
-    document.getElementById("toggleDynamicSpeed").checked = Gameboy.defaults.toggleDynamicSpeed;
     Gameboy.Core.toggleDynamicSpeed(Gameboy.defaults.toggleDynamicSpeed);
 }
 
@@ -231,20 +224,14 @@ function writeRedTemporaryText(textString) {
     if (Gameboy.timerID) {
         clearTimeout(Gameboy.timerID);
     }
-    document.getElementById("tempMessage").style.display = "block";
-    document.getElementById("tempMessage").textContent = textString;
-    Gameboy.timerID = setTimeout(clearTempString, 5000);
 }
 
-function clearTempString() {
-    document.getElementById("tempMessage").style.display = "none";
-}
 //Some wrappers and extensions for non-DOM3 browsers:
 function addEvent(sEvent, oElement, fListener) {
     try {
         oElement.addEventListener(sEvent, fListener, false);
     } catch (error) {
-        oElement.attachEvent("on" + sEvent, fListener); //Pity for IE.
+
     }
 }
 
@@ -552,7 +539,7 @@ function attachROM(ROM) {
     }
 }
 
-function fileLoadShimCode(files, ROMHandler, isBIOS) {
+function fileLoadShimCode(files, ROMHandler, isBIOS, response) {
 
 
     if (typeof files != "undefined") {
@@ -570,9 +557,9 @@ function fileLoadShimCode(files, ROMHandler, isBIOS) {
                     })
 
                 } else {
-                    downloadFile("1986 - Pokemon - Emerald Version (UE).gba", function() {
-                            ROMHandler(this.response)
-                        })
+                    
+                    ROMHandler(response);
+                        
                         //binaryHandle.readAsArrayBuffer(files[files.length - 1]);
                 }
             } catch (error) {
@@ -595,8 +582,8 @@ function fileLoadBIOS() {
     fileLoadShimCode("BIOS", attachBIOS, true);
 }
 
-function fileLoadROM() {
-    fileLoadShimCode("asdsad", attachROM, false);
+function fileLoadROM(file) {
+    fileLoadShimCode("asdsad", attachROM, false, file);
 }
 
 function downloadFile(fileName, registrationHandler) {

@@ -67,46 +67,26 @@
     </head>
     <body>
         <div id="main">
-            <canvas id="emulator_target" width="240" height="160"></canvas>
+            <div id="menu">
+                <canvas id="emulator_target" width="240" height="160"></canvas>
+                <input type="submit" value="Import ROM" onclick="javascript:togglleRomSelector()" class="midnight-blue-flat-button"><br>
+                <label>Sound: </label><input type="checkbox" id="sound" class="checkbox">
+                <label>Volume: </label><input type="range" id="volume" class="checkbox">
+            </div>
         </div>
-        <span id="tempMessage">...</span>
         <div id="control_panel">
-            <!-- <div id="load_panel">
-                <form>
-                    <fieldset>
-                        <legend>Load ROM:</legend>
-                        <div class="fileLoad">
-                            <label>BIOS:</label><input type="file" id="bios_load" class="files">
-                        </div>
-                        <div class="fileLoad">
-                            <label>Game:</label><input type="file" id="rom_load" class="files">
-                        </div>
-                    </fieldset>
-                </form>
-            </div> -->
             <div id="play_controls">
-                <legend>Controls: </legend>
                 <div id="playControls">
                     <button id="play">Play</button>
                     <button id="pause">Pause</button>
                     <button id="restart">Restart</button>
+                    <input type="file" id="rominput">
                 </div>
-                <label>Skip Boot Intro: </label><input type="checkbox" id="skip_boot" class="checkbox">
-                <label>Smooth Scaling: </label><input type="checkbox" id="toggleSmoothScaling" checked="checked" class="checkbox">
-                <label>Dynamic Speed: </label><input type="checkbox" id="toggleDynamicSpeed" class="checkbox">
-                <label>Sound: </label><input type="checkbox" id="sound" class="checkbox">
-                <label>Volume: </label><input type="range" id="volume" class="checkbox">
             </div>
             <div id="save_controls">
-                <legend>Saves: </legend>
                 <div id="saveControls">
-                    <div class="fileLoad">
-                        <label>Import:</label><input type="file" id="import" class="files">
-                    </div>
                     <button id="export" target="_new">Export All Saves</button>
                 </div>
-            </div>
-            <div id="speed">
             </div>
         </div>
     </body>
